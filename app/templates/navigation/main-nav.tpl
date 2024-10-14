@@ -4,17 +4,14 @@
 	<ul>
 		<li class="app-logo-li"><a title="Caremon" href="/"><img src="/styles/img/mortarboard.svg"></a></li>
 
-		<li><a href="/" title="Planung">Zeiterfassung</a></li>
-		<li><a href="/clients" title="Klienten">Klienten</a></li>
-
-		<li><a href="/">Abteilungen</a>
+		<li><a href="/">Zeiterfassung</a></li>
+		<li><a href="/careing">Monatsübersicht</a></li>		
+		<li><a href="/clients">Klienten</a>
 			<ul class="dropdown" aria-label="submenu">
-				<li><a href="/support">Kundenservice</a></li>		
-				<li><a href="/sales">Anzeigenverkauf</a></li>	
-				<li><a href="/horoskope">Horoskope</a></li>
-				<li><a href="/coding">Webentwicklung</a></li>
+				<li><a href="/clients/new">Neu erfassen</a></li>		
 			</ul>
 		</li>
+		<li><a href="/stats">Statistiken</a></li>		
 
 	</ul>
 

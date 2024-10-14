@@ -1,13 +1,11 @@
 <main>
 
-<div class="fright">
-	<a href="/slots/new" class="button">Neuer Eintrag</a>
+<div class="fright submenu">
+	<a href="/slots/new" class="button">Stunden erfassen</a>
 </div>
 
-<h1><?=$page['title']?> - Stundenerfassung</h1>
 
-
-
+<h1>Stundenerfassung</h1>
 
 <table class="fancy js-tablesort wide" style="table-layout: fixed;">
 <thead>
@@ -25,12 +23,13 @@
 <?php foreach ($slots as $slot): ?>
 <tr>
 	<td><?=$slot['timeframe']?>&thinsp;h</td>
-	<td><?=$slot['firstname']?> <?=$slot['lastname']?></td>
+	<td><a href="/slots/<?=$slot['id']?>"><?=$slot['firstname']?> <?=$slot['lastname']?></a></td>
 	<td><a class="noline" href="/slots/<?=$slot['id']?>"><?=$slot['notes'] ?? '-'?></a></td>
-	<td><a class="noline" href="/slots/<?=$slot['id']?>"><?=$slot['category'] ?? 'Keine'?></a></td>
+	<td><?=$slot['category'] ?? 'Keine'?></td>
 	<td class="text-right"><?=formatDate($slot['date'], 'd.m.Y')?></td>
 
-	<td class="text-right" style="white-space:nowrap;">
+	<td>
+		<div class="flex-end">
 		<a id="copy-prompt-<?=$slot['id']?>" title="kopieren" class="noline pointer"><img class="icon-delete" src="/styles/flundr/img/icon-copy.svg"></a>
 		<fl-dialog selector="#copy-prompt-<?=$slot['id']?>" href="/slots/<?=$slot['id']?>/copy">
 		<h1><?=$slot['id']?> - kopieren?</h1>
@@ -42,6 +41,7 @@
 		<h1><?=$slot['id']?> - löschen?</h1>
 		<p>Möchten Sie den Klienten wirklich löschen?</p>
 		</fl-dialog>
+		</div>
 	</td>
 
 </tr>
@@ -49,85 +49,6 @@
 </tbody>
 </table>
 
-
-<hr>
-
-
-
-<div class="grid-3-col wide-gap">
-<section>
-	<h3>Stundenaufkommen pro Klient</h3>
-	<table class="fancy js-tablesort wide" style="table-layout: fixed;">
-	<thead>
-		<tr>
-			<th>Klient</th>
-			<th>Beansprucht</th>
-			<th>Budget</th>
-		</tr>
-	</thead>
-
-	<tbody>
-	<?php foreach ($budgets as $client): ?>
-	<tr>
-		<td><?=$client['firstname']?> <?=$client['lastname']?></td>
-		<td><?=$client['hours']?>&thinsp;h</td>
-		<td><?=$client['budget']?>&thinsp;h</td>
-	</tr>
-	<?php endforeach ?>
-	</tbody>
-	</table>
-</section>
-
-<section>
-	<h3>Stundenaufkommen pro Monat</h3>
-	<table class="fancy js-tablesort wide" style="table-layout: fixed;">
-	<thead>
-		<tr>
-			<th>Monat</th>
-			<th>Stunden</th>
-		</tr>
-	</thead>
-
-	<tbody>
-	<?php foreach ($monthHours as $data): ?>
-	<tr>
-		<td><?=$data['month']?></td>
-		<td><?=$data['hours']?>&thinsp;h</td>
-	</tr>
-	<?php endforeach ?>
-	</tbody>
-	</table>
-</section>
-
-
-<section>
-	<h3>Stundenaufkommen nach Betreuer</h3>
-	<table class="fancy js-tablesort wide" style="table-layout: fixed;">
-	<thead>
-		<tr>
-			<th>Monat</th>
-			<th>Stunden</th>
-		</tr>
-	</thead>
-
-	<tbody>
-	<?php foreach ($advisorHours as $data): ?>
-	<tr>
-		<td><?=$data['advisor']?></td>
-		<td><?=$data['hours']?>&thinsp;h</td>
-	</tr>
-	<?php endforeach ?>
-	</tbody>
-	</table>
-</section>
-
-</div>
-
-
-<div style="max-width:200px;" class="box fright">
-<?php include tpl('navigation/date-picker');?>
-</div>
-
-
+<?=$pager?>
 
 </main>

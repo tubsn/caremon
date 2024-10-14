@@ -3,7 +3,7 @@
 <h1><?=$page['title']?></h1>
 <p>Bitte geben Sie alle relevanten Details ein und achten Sie darauf, dass die Angaben vollständig und korrekt sind. Die erfassten Daten sind Grundlage für die Therapiepläne.</p>
 
-<form method="post" action="" class="form-container">
+<form method="post" action="" class="form-container" style="max-width:1800px">
 <div class="grid-2-wide wide-gap">
 
 <section>
@@ -43,11 +43,26 @@
 </section>
 
 <section>
+
+	<fieldset class="grid-2-back-wide">
+		<label>Stundenbudget
+			<input type="text" name="budget" placeholder="in Stunden" value="<?=$client['budget'] ?? ''?>">
+		</label>
+		<label>ASD
+			<input type="text" list="asdlist" name="asd" placeholder="z.B. Frau Muster " value="<?=$client['asd'] ?? ''?>">
+			<datalist id="asdlist">
+				<?php foreach ($asds as $asd): ?>
+					<option value="<?=$asd?>"></option>
+				<?php endforeach ?>
+			</datalist>
+		</label>		
+	</fieldset>
+
 	<fieldset class="grid-2-col">
-		<label>Budget Start
+		<label>Betreuung Start
 			<input type="date" name="budget_start" value="<?=$client['budget_start'] ?? ''?>">
 		</label>
-		<label>Budget Ende
+		<label>Betreuung Ende
 			<input type="date" name="budget_end" value="<?=$client['budget_end'] ?? ''?>">
 		</label>		
 	</fieldset>
@@ -61,13 +76,6 @@
 			<input type="text" name="telephone" placeholder="Telefonnummer" value="<?=$client['telephone'] ?? ''?>">
 		</label>		
 	</fieldset>
-
-	<fieldset>
-		<label>Stundenbudget
-			<input type="text" name="budget" placeholder="in Stunden" value="<?=$client['budget'] ?? ''?>">
-		</label>
-	</fieldset>
-
 </section>
 
 </div>
@@ -75,13 +83,21 @@
 <button class="submit">Angaben speichern</button>&ensp;
 <a class="button light" href="/clients">zurück zur Übersicht</a>
 
-</form>
-
 
 <?php if (isset($client['edited'])): ?>
 <small class="fright">
-Editiert: <?=formatDate($client['edited'],'d.m.Y H:i')?>
+&nbsp;| Editiert: <?=formatDate($client['edited'],'d.m.Y H:i')?>
 </small>
 <?php endif ?>
+<?php if (isset($client['created'])): ?>
+<small class="fright">
+Angelegt: <?=formatDate($client['created'],'d.m.Y H:i')?> 
+</small>
+<?php endif ?> 
+
+</form>
+
+
+
 
 </main>

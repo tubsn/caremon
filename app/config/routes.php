@@ -1,11 +1,4 @@
 <?php
-/*
-Complete Documentation on: https://github.com/nikic/FastRoute
-Example Routes:
-$routes->get('/urlpath[/{optionalparameter}]', 'Controller@Action');
-$routes->post('/article/{id:\d+}', 'Controller@Action'); With ID-Parameter (Numeric)
-*/
-
 $routes->get('/', 'Timetable@index');
 
 // Slots
@@ -17,23 +10,19 @@ $routes->get('/slots/{slotID:\d+}/copy', 'Timetable@copy');
 $routes->post('/slots/{slotID:\d+}', 'Timetable@update');
 
 
-
-
 // Clients
 $routes->get('/clients', 'Clients@index');
 $routes->get('/clients/new', 'Clients@new');
-$routes->get('/clients/{userID:\d+}', 'Clients@edit');
-$routes->get('/clients/{userID:\d+}/delete', 'Clients@delete');
-$routes->get('/clients/{userID:\d+}/copy', 'Clients@copy');
-$routes->post('/clients/{userID:\d+}', 'Clients@update');
+$routes->get('/clients/{clientID:\d+}', 'Clients@edit');
+$routes->get('/clients/{clientID:\d+}/delete', 'Clients@delete');
+$routes->get('/clients/{clientID:\d+}/copy', 'Clients@copy');
+$routes->post('/clients/{clientID:\d+}', 'Clients@update');
 $routes->post('/clients/new', 'Clients@create');
 
-
-
-
-
-
-
+// Care
+$routes->get('/careing', 'Careing@index');
+$routes->get('/careing/{clientID:\d+}', 'Careing@client');
+$routes->get('/stats', 'Stats@index');
 
 
 // You can delete these if you don´t need Users in your App

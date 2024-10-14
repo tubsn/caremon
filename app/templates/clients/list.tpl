@@ -16,7 +16,7 @@
 <table class="fancy wide" style="table-layout: fixed;">
 <thead>
 	<tr>
-		<th style="width:10%">Stundenbudget</th>
+		<th style="width:10%">Budget</th>
 		<th style="width:30%">Name</th>
 		<th style="width:30%">Wohnort</th>
 		<th style="width:30%">E-mail</th>
@@ -29,7 +29,10 @@
 <tbody>
 <?php foreach ($clients as $client): ?>
 <tr>
-	<td><?=$client['budget'] ?? '-'?> h</td>
+	<td>
+
+		<?=$hours[$client['id']] ?? '-'?> / 
+		<?=$client['budget'] ?? '-'?> h</td>
 	<td><a class="noline" href="/clients/<?=$client['id']?>"><?=$client['firstname']?> <?=$client['lastname']?></a></td>
 	<td><?=$client['location'] ?? '-'?></td>
 	<td><?=$client['email'] ?? '-'?></td>
@@ -38,9 +41,8 @@
 
 	<td style="white-space:nowrap;"><?=formatDate($client['created'],'Y-m-d')?></td>
 
-
-
-	<td class="text-right" style="white-space:nowrap;">
+	<td>
+	<div class="flex-end">
 		<a id="copy-prompt-<?=$client['id']?>" title="kopieren" class="noline pointer"><img class="icon-delete" src="/styles/flundr/img/icon-copy.svg"></a>
 		<fl-dialog selector="#copy-prompt-<?=$client['id']?>" href="/clients/<?=$client['id']?>/copy">
 		<h1><?=$client['lastname']?> - kopieren?</h1>
@@ -52,6 +54,7 @@
 		<h1><?=$client['lastname']?> - löschen?</h1>
 		<p>Möchten Sie den Klienten wirklich löschen?</p>
 		</fl-dialog>
+	</div>
 	</td>
 
 </tr>

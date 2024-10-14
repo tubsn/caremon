@@ -1,16 +1,17 @@
 <main>
 
-<h1>Zeiterfassung anlegen</h1>
+<h1>Stundenerfassung <?php if (!empty($slot['id'])): ?>korrigieren<?php endif ?></h1>
 
-<form action="" method="post" class="form-container">
+<form action="" method="post" class="form-container" style="max-width:960px">
 
-<div class="grid-3-col">
+<div class="grid-2-col">
 <fieldset>
 <label>Klienten auswählen</label>
 <select name="client_id">
 <?php foreach ($clients as $client): ?>
 	<option <?php if (isset($slot['client_id']) AND $slot['client_id'] == $client['id']): ?>selected<?php endif ?>
-	value="<?=$client['id']?>"><?=$client['firstname']?> <?=$client['lastname']?> (<?=formatDate($client['budget_start'], 'd.m.y')?> - <?=formatDate($client['budget_end'], 'd.m.y')?>)</option>
+	value="<?=$client['id']?>"><?=$client['firstname']?> <?=$client['lastname']?>
+	</option>
 <?php endforeach ?>
 </select>
 </fieldset>
@@ -18,31 +19,19 @@
 <fieldset>
 <label>Kategorie</label>
 <select name="category">
+	<option <?php if (isset($slot['category']) AND $slot['category'] == 'Lerntherapie'): ?>selected<?php endif ?>>Lerntherapie</option>	
 	<option <?php if (isset($slot['category']) AND $slot['category'] == 'Betreuung'): ?>selected<?php endif ?>>Betreuung</option>
 	<option <?php if (isset($slot['category']) AND $slot['category'] == 'Training'): ?>selected<?php endif ?>>Training</option>
 	<option <?php if (isset($slot['category']) AND $slot['category'] == 'Schule'): ?>selected<?php endif ?>>Schule</option>
-	<option <?php if (isset($slot['category']) AND $slot['category'] == 'usw.'): ?>selected<?php endif ?>>usw.</option>
+	<option <?php if (isset($slot['category']) AND $slot['category'] == 'keine Angabe'): ?>selected<?php endif ?>>keine Angabe</option>
 </select>
 </fieldset>
-
-
-<fieldset>
-<label>Betreuer</label>
-<select name="advisor_id">
-
-<?php foreach ($advisors as $advisor): ?>
-	<option <?php if (isset($slot['advisor_id']) AND $slot['advisor_id'] == $advisor['id']): ?>selected<?php endif ?>
-	value="<?=$advisor['id']?>"><?=$advisor['firstname']?> <?=$advisor['lastname']?></option>
-<?php endforeach ?>
-
-</select>
-</fieldset>
-
 
 </div>
 
 
-<fieldset class="grid-2-wide">
+<fieldset class="grid-3-col">
+
 	<label>Datum
 		<input name="date" type="date" value="<?=$slot['date'] ?? date('Y-m-d')?>">
 	</label>
@@ -60,11 +49,20 @@
 			<option <?php if (isset($slot['timeframe']) AND $slot['timeframe'] == 9): ?>selected<?php endif ?> value="9">9h</option>
 		</select>
 	</label>
+
+	<label>Betreuer
+		<select name="advisor_id">
+		<?php foreach ($advisors as $advisor): ?>
+			<option <?php if (isset($slot['advisor_id']) AND $slot['advisor_id'] == $advisor['id']): ?>selected<?php endif ?>
+			value="<?=$advisor['id']?>"><?=$advisor['firstname']?> <?=$advisor['lastname']?></option>
+		<?php endforeach ?>
+		</select>
+	</label>
 </fieldset>
 
 <fieldset>
 	<label>Weitere Angaben
-	<textarea name="notes" placeholder="Notizen"><?=$slot['notes'] ?? ''?></textarea>
+	<textarea name="notes" class="large" placeholder="Beschreibung"><?=$slot['notes'] ?? ''?></textarea>
 	</label>
 </fieldset>
 
